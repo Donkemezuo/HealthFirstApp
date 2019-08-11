@@ -19,17 +19,18 @@ class StarWarsHomeViewController: UIViewController {
       self.title = "Starwars"
         starWarsHomeView.starWarsTableView.dataSource = self
         starWarsHomeView.starWarsTableView.delegate = self
+        configureSegmentedConstrol()
+        
     }
     
-
-}
-
-extension StarWarsHomeViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+    private func configureSegmentedConstrol(){
+        starWarsHomeView.viewSegmentedControl.addTarget(self, action: #selector(segmentedControlPressed), for: .valueChanged)
+        
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    @objc private func segmentedControlPressed(tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
+        
+        
         switch starWarsHomeView.viewSegmentedControl.selectedSegmentIndex {
         case 0:
             guard let peopleTVCell = tableView.dequeueReusableCell(withIdentifier: "PeopleTableViewCell", for: indexPath) as? PeopleTableViewCell else { return UITableViewCell()}
@@ -38,7 +39,6 @@ extension StarWarsHomeViewController: UITableViewDelegate, UITableViewDataSource
             
             return peopleTVCell
         case 1:
-            print(starWarsHomeView.viewSegmentedControl.selectedSegmentIndex)
             guard let placesTVCell = tableView.dequeueReusableCell(withIdentifier: "PlacesTableViewCell", for: indexPath) as? PlacesTableViewCell else {return UITableViewCell()}
             
             placesTVCell.textLabel?.text = "Yenagoa"
@@ -47,6 +47,19 @@ extension StarWarsHomeViewController: UITableViewDelegate, UITableViewDataSource
         default:
             return UITableViewCell()
         }
+        
+    }
+}
+
+extension StarWarsHomeViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 10
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cellToDisplay = segmentedControlPressed(tableView: tableView, indexPath: indexPath)
+        
+        return cellToDisplay
     }
     
     

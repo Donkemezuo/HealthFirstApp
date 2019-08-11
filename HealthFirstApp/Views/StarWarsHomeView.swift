@@ -16,6 +16,7 @@ class StarWarsHomeView: UIView {
         viewSegmentedControl.insertSegment(withTitle: "Places", at: 1, animated: true)
         viewSegmentedControl.setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-Bold", size: 16) ?? 0, NSAttributedString.Key.foregroundColor: UIColor.white], for: .normal)
         viewSegmentedControl.selectedSegmentIndex = 0
+        //viewSegmentedControl.addTarget(self, action: #selector(segmentedControlToggled), for: .valueChanged)
         return viewSegmentedControl
     }()
     
@@ -30,6 +31,7 @@ class StarWarsHomeView: UIView {
     override init(frame: CGRect) {
         super.init(frame: UIScreen.main.bounds)
         commonInit()
+       // segmentedControlToggled()
 
     }
     
@@ -37,6 +39,19 @@ class StarWarsHomeView: UIView {
         super.init(coder: aDecoder)
         commonInit()
     }
+//
+//    @objc private func segmentedControlToggled(){
+//
+//        switch viewSegmentedControl.selectedSegmentIndex {
+//        case 0:
+//        starWarsTableView.register(PeopleTableViewCell.self, forCellReuseIdentifier: "PeopleTableViewCell")
+//        case 1:
+//           starWarsTableView.register(PlacesTableViewCell.self, forCellReuseIdentifier: "PlacesTableViewCell")
+//        default:
+//            break
+//        }
+//
+//    }
 
     private func commonInit(){
         setViewConstrains()
