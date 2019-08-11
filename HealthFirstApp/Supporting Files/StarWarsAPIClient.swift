@@ -74,8 +74,5 @@ final class StarWarsAPIClient {
         dataTask.resume()
     }
     
-    
-    
-    
 }
 

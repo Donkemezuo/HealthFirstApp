@@ -11,6 +11,7 @@ import UIKit
 class StarWarsHomeViewController: UIViewController {
     
     private var starWarsHomeView = StarWarsHomeView()
+   
     
     private var places = [PlacesDataWrapper]() {
         didSet {
@@ -31,7 +32,7 @@ class StarWarsHomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(starWarsHomeView)
-        view.backgroundColor = .red
+        view.backgroundColor = UIColor(hexString: "083D77")
       self.title = "Starwars"
         starWarsHomeView.starWarsTableView.dataSource = self
         starWarsHomeView.starWarsTableView.delegate = self
@@ -74,6 +75,8 @@ class StarWarsHomeViewController: UIViewController {
     }
     
     
+    
+    
 }
 extension StarWarsHomeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -91,8 +94,16 @@ extension StarWarsHomeViewController: UITableViewDelegate, UITableViewDataSource
         if starWarsHomeView.viewSegmentedControl.selectedSegmentIndex == 0 {
             let person = people[indexPath.row]
             guard let peopleTVCell =  starWarsHomeView.starWarsTableView.dequeueReusableCell(withIdentifier: "PeopleTableViewCell", for: indexPath) as? PeopleTableViewCell else { fatalError("PeopleTableViewCell is nil") }
+            peopleTVCell.nameLabel.text = person.name
+            peopleTVCell.genderLabel.text = "Gender: \(person.gender)"
+            peopleTVCell.heightLabel.text = "Height: \(person.height)"
+            if person.created != nil {
+                peopleTVCell.createdDateLabel.text = "Created Since \(String(describing: person.created))"
+            } else {
+                peopleTVCell.createdDateLabel.text = "Created date not specified"
+            }
             
-            peopleTVCell.textLabel?.text = person.name
+            peopleTVCell.backgroundColor = .clear
             
             return peopleTVCell
         } else {
@@ -101,8 +112,18 @@ extension StarWarsHomeViewController: UITableViewDelegate, UITableViewDataSource
             
             placesTVCell.textLabel?.text = place.name
             
+            
             return placesTVCell
         }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let person = people[indexPath.row]
+        self.present(PeopleDetailsViewController(person: person), animated: true, completion: nil)
     }
 }
 
