@@ -15,6 +15,8 @@
 		04264ED423005D5C00D3C9CA /* StarWarsHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04264ED323005D5B00D3C9CA /* StarWarsHomeView.swift */; };
 		04264EDA230067F400D3C9CA /* PeopleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04264ED9230067F400D3C9CA /* PeopleTableViewCell.swift */; };
 		04264EDC230067FE00D3C9CA /* PlacesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04264EDB230067FE00D3C9CA /* PlacesTableViewCell.swift */; };
+		04264EDE2300737800D3C9CA /* PeopleDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04264EDD2300737800D3C9CA /* PeopleDataModel.swift */; };
+		04264EE02300739900D3C9CA /* PlacesDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04264EDF2300739900D3C9CA /* PlacesDataModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +30,8 @@
 		04264ED323005D5B00D3C9CA /* StarWarsHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarWarsHomeView.swift; sourceTree = "<group>"; };
 		04264ED9230067F400D3C9CA /* PeopleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleTableViewCell.swift; sourceTree = "<group>"; };
 		04264EDB230067FE00D3C9CA /* PlacesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesTableViewCell.swift; sourceTree = "<group>"; };
+		04264EDD2300737800D3C9CA /* PeopleDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleDataModel.swift; sourceTree = "<group>"; };
+		04264EDF2300739900D3C9CA /* PlacesDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesDataModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +96,8 @@
 		04264ED123005AE000D3C9CA /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				04264EDD2300737800D3C9CA /* PeopleDataModel.swift */,
+				04264EDF2300739900D3C9CA /* PlacesDataModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -184,6 +190,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04264EE02300739900D3C9CA /* PlacesDataModel.swift in Sources */,
+				04264EDE2300737800D3C9CA /* PeopleDataModel.swift in Sources */,
 				04264EDC230067FE00D3C9CA /* PlacesTableViewCell.swift in Sources */,
 				04264EDA230067F400D3C9CA /* PeopleTableViewCell.swift in Sources */,
 				04264ECE23005ABD00D3C9CA /* StarWarsHomeViewController.swift in Sources */,

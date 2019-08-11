@@ -28,39 +28,31 @@ class StarWarsHomeViewController: UIViewController {
         
     }
     
-    @objc private func segmentedControlPressed(tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
-        
-        
-        switch starWarsHomeView.viewSegmentedControl.selectedSegmentIndex {
-        case 0:
-            guard let peopleTVCell = tableView.dequeueReusableCell(withIdentifier: "PeopleTableViewCell", for: indexPath) as? PeopleTableViewCell else { return UITableViewCell()}
-            
-            peopleTVCell.textLabel?.text = "Raymond"
-            
-            return peopleTVCell
-        case 1:
-            guard let placesTVCell = tableView.dequeueReusableCell(withIdentifier: "PlacesTableViewCell", for: indexPath) as? PlacesTableViewCell else {return UITableViewCell()}
-            
-            placesTVCell.textLabel?.text = "Yenagoa"
-            
-            return placesTVCell
-        default:
-            return UITableViewCell()
-        }
-        
-    }
+    @objc private func segmentedControlPressed()  {
+        starWarsHomeView.starWarsTableView.reloadData()
 }
-
+    
+    
+}
 extension StarWarsHomeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 10
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cellToDisplay = segmentedControlPressed(tableView: tableView, indexPath: indexPath)
-        
-        return cellToDisplay
+        if starWarsHomeView.viewSegmentedControl.selectedSegmentIndex == 0 {
+            guard let peopleTVCell =  starWarsHomeView.starWarsTableView.dequeueReusableCell(withIdentifier: "PeopleTableViewCell", for: indexPath) as? PeopleTableViewCell else { fatalError("PeopleTableViewCell is nil") }
+            
+            peopleTVCell.textLabel?.text = "Raymond"
+            
+            return peopleTVCell
+        } else {
+            guard let placesTVCell = starWarsHomeView.starWarsTableView.dequeueReusableCell(withIdentifier: "PlacesTableViewCell", for: indexPath) as? PlacesTableViewCell else { fatalError("PlacesTableViewCell is nil") }
+            
+            placesTVCell.textLabel?.text = "Yenagoa"
+            
+            return placesTVCell
+        }
     }
-    
-    
 }
+
