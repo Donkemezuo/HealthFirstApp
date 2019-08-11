@@ -110,7 +110,11 @@ extension StarWarsHomeViewController: UITableViewDelegate, UITableViewDataSource
             let place = places[indexPath.row]
             guard let placesTVCell = starWarsHomeView.starWarsTableView.dequeueReusableCell(withIdentifier: "PlacesTableViewCell", for: indexPath) as? PlacesTableViewCell else { fatalError("PlacesTableViewCell is nil") }
             
-            placesTVCell.textLabel?.text = place.name
+            placesTVCell.planetNameLabel.text = "Name: \(place.name)"
+            placesTVCell.planetClimate.text = "Climate: \(place.climate)"
+            placesTVCell.planetPopulation.text = "Population: \(place.population)"
+            placesTVCell.createdDateLabel.text = "Created Since \(String(describing: place.created))"
+            placesTVCell.backgroundColor = .clear
             
             
             return placesTVCell
@@ -118,7 +122,12 @@ extension StarWarsHomeViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
+        if starWarsHomeView.viewSegmentedControl.selectedSegmentIndex == 0{
+            return 100
+        } else {
+        return 150
+        }
+ 
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

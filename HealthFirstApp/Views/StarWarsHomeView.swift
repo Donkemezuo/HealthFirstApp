@@ -15,13 +15,14 @@ class StarWarsHomeView: UIView {
         viewSegmentedControl.insertSegment(withTitle: "People", at: 0, animated: true)
         viewSegmentedControl.insertSegment(withTitle: "Places", at: 1, animated: true)
         viewSegmentedControl.setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-Bold", size: 16) ?? 0, NSAttributedString.Key.foregroundColor: UIColor.white], for: .normal)
+        viewSegmentedControl.tintColor = .white 
         viewSegmentedControl.selectedSegmentIndex = 0
         return viewSegmentedControl
     }()
     
     public lazy var starWarsTableView: UITableView = {
         let starWarsTableView = UITableView()
-        starWarsTableView.backgroundColor = .clear 
+        starWarsTableView.backgroundColor = .clear
         starWarsTableView.register(PeopleTableViewCell.self, forCellReuseIdentifier: "PeopleTableViewCell")
         starWarsTableView.register(PlacesTableViewCell.self, forCellReuseIdentifier: "PlacesTableViewCell")
         return starWarsTableView
