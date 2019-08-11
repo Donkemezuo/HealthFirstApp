@@ -11,7 +11,23 @@ import UIKit
 class StarWarsHomeViewController: UIViewController {
     
     private var starWarsHomeView = StarWarsHomeView()
+    
+    private var places = [PlacesDataWrapper]() {
+        didSet {
+            DispatchQueue.main.async {
+                self.starWarsHomeView.starWarsTableView.reloadData()
+            }
+        }
+    }
 
+    private var people = [PeopleDataWrapper](){
+        didSet {
+            DispatchQueue.main.async {
+                self.starWarsHomeView.starWarsTableView.reloadData()
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(starWarsHomeView)
@@ -20,6 +36,8 @@ class StarWarsHomeViewController: UIViewController {
         starWarsHomeView.starWarsTableView.dataSource = self
         starWarsHomeView.starWarsTableView.delegate = self
         configureSegmentedConstrol()
+        getPeopleData()
+        getPlacesData()
         
     }
     
@@ -32,24 +50,56 @@ class StarWarsHomeViewController: UIViewController {
         starWarsHomeView.starWarsTableView.reloadData()
 }
     
+    private func getPeopleData(){
+        StarWarsAPIClient.getPeopleData { (queryResult) in
+            switch queryResult {
+            case .failure(let error):
+                print("Error \(error) encountered while fetching data")
+            case .success(let peopleData):
+                self.people = peopleData
+            }
+            
+        }
+    }
+    
+    private func getPlacesData(){
+        StarWarsAPIClient.getPlacesData { (queryResult) in
+            switch queryResult {
+            case .failure(let error):
+                print("Error: \(error) encountered while fetching data")
+            case .success(let placesData):
+                self.places = placesData
+            }
+        }
+    }
+    
     
 }
 extension StarWarsHomeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        switch starWarsHomeView.viewSegmentedControl.selectedSegmentIndex {
+        case 0:
+            return people.count
+        case 1:
+            return places.count
+        default:
+            return 0
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if starWarsHomeView.viewSegmentedControl.selectedSegmentIndex == 0 {
+            let person = people[indexPath.row]
             guard let peopleTVCell =  starWarsHomeView.starWarsTableView.dequeueReusableCell(withIdentifier: "PeopleTableViewCell", for: indexPath) as? PeopleTableViewCell else { fatalError("PeopleTableViewCell is nil") }
             
-            peopleTVCell.textLabel?.text = "Raymond"
+            peopleTVCell.textLabel?.text = person.name
             
             return peopleTVCell
         } else {
+            let place = places[indexPath.row]
             guard let placesTVCell = starWarsHomeView.starWarsTableView.dequeueReusableCell(withIdentifier: "PlacesTableViewCell", for: indexPath) as? PlacesTableViewCell else { fatalError("PlacesTableViewCell is nil") }
             
-            placesTVCell.textLabel?.text = "Yenagoa"
+            placesTVCell.textLabel?.text = place.name
             
             return placesTVCell
         }

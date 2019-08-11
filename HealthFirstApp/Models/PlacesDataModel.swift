@@ -14,11 +14,11 @@ struct PlacesData: Codable {
 
 struct PlacesDataWrapper: Codable {
     let name: String
-    let rotation_period: String
-    let orbital_period: String
+    let rotation_period: String?
+    let orbital_period: String?
     let population: String
     let climate: String
-    let created: String
+    let created: String?
     
     enum CodingKeys: String,CodingKey {
         case name

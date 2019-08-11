@@ -17,6 +17,7 @@
 		04264EDC230067FE00D3C9CA /* PlacesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04264EDB230067FE00D3C9CA /* PlacesTableViewCell.swift */; };
 		04264EDE2300737800D3C9CA /* PeopleDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04264EDD2300737800D3C9CA /* PeopleDataModel.swift */; };
 		04264EE02300739900D3C9CA /* PlacesDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04264EDF2300739900D3C9CA /* PlacesDataModel.swift */; };
+		04264EE22300815B00D3C9CA /* StarWarsAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04264EE12300815B00D3C9CA /* StarWarsAPIClient.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		04264EDB230067FE00D3C9CA /* PlacesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesTableViewCell.swift; sourceTree = "<group>"; };
 		04264EDD2300737800D3C9CA /* PeopleDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleDataModel.swift; sourceTree = "<group>"; };
 		04264EDF2300739900D3C9CA /* PlacesDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesDataModel.swift; sourceTree = "<group>"; };
+		04264EE12300815B00D3C9CA /* StarWarsAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarWarsAPIClient.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +108,7 @@
 			isa = PBXGroup;
 			children = (
 				04264EBB23005A8800D3C9CA /* AppDelegate.swift */,
+				04264EE12300815B00D3C9CA /* StarWarsAPIClient.swift */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -192,6 +195,7 @@
 			files = (
 				04264EE02300739900D3C9CA /* PlacesDataModel.swift in Sources */,
 				04264EDE2300737800D3C9CA /* PeopleDataModel.swift in Sources */,
+				04264EE22300815B00D3C9CA /* StarWarsAPIClient.swift in Sources */,
 				04264EDC230067FE00D3C9CA /* PlacesTableViewCell.swift in Sources */,
 				04264EDA230067F400D3C9CA /* PeopleTableViewCell.swift in Sources */,
 				04264ECE23005ABD00D3C9CA /* StarWarsHomeViewController.swift in Sources */,

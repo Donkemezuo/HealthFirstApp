@@ -19,13 +19,13 @@ struct PeopleDataWrapper: Codable {
     let name: String
     let height: String
     let mass: String
-    let hair_color: String
-    let skin_color: String
-    let eye_color: String
-    let birth_year: String
+    let hair_color: String?
+    let skin_color: String?
+    let eye_color: String?
+    let birth_year: String?
     let gender: String
     let homeworld: String
-    let created: String
+    let created: String?
     
      enum CodingKeys: String, CodingKey {
         case name
