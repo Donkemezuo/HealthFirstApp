@@ -14,10 +14,9 @@ class PeopleDetailsViewController: UIViewController {
     private var person: PeopleDataWrapper!
     private var screenTap: UITapGestureRecognizer!
     
-
     override func viewDidLoad() {
         super.viewDidLoad()
-       view.backgroundColor = UIColor.lightGray
+       view.backgroundColor = UIColor.white
         configurePopUpViewConstrains()
         configureDismissView()
         displayPersonInformations()

@@ -19,6 +19,10 @@ struct PlacesDataWrapper: Codable {
     let population: String
     let climate: String
     let created: String?
+    let terrain: String
+    let surface_water: String?
+    let gravity: String
+    let diameter: String
     
     enum CodingKeys: String,CodingKey {
         case name
@@ -27,5 +31,9 @@ struct PlacesDataWrapper: Codable {
         case population
         case climate
         case created = "createdDate"
+        case terrain
+        case surface_water = "surfaceWater"
+        case gravity
+        case diameter
     }
 }

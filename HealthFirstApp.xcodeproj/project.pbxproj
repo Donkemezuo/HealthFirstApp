@@ -21,6 +21,8 @@
 		04264EE42300A00200D3C9CA /* BackgroundColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04264EE32300A00200D3C9CA /* BackgroundColor+Extension.swift */; };
 		04264EE62300A2C700D3C9CA /* PeopleDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04264EE52300A2C700D3C9CA /* PeopleDetailsViewController.swift */; };
 		04264EE82300A2ED00D3C9CA /* PeopleDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04264EE72300A2ED00D3C9CA /* PeopleDetailsView.swift */; };
+		04264EEA2300C6E000D3C9CA /* PlanetsDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04264EE92300C6E000D3C9CA /* PlanetsDetailsView.swift */; };
+		04264EEC2300D32800D3C9CA /* PlacesDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04264EEB2300D32800D3C9CA /* PlacesDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +42,8 @@
 		04264EE32300A00200D3C9CA /* BackgroundColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BackgroundColor+Extension.swift"; sourceTree = "<group>"; };
 		04264EE52300A2C700D3C9CA /* PeopleDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleDetailsViewController.swift; sourceTree = "<group>"; };
 		04264EE72300A2ED00D3C9CA /* PeopleDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleDetailsView.swift; sourceTree = "<group>"; };
+		04264EE92300C6E000D3C9CA /* PlanetsDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetsDetailsView.swift; sourceTree = "<group>"; };
+		04264EEB2300D32800D3C9CA /* PlacesDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +93,7 @@
 			children = (
 				04264ECD23005ABD00D3C9CA /* StarWarsHomeViewController.swift */,
 				04264EE52300A2C700D3C9CA /* PeopleDetailsViewController.swift */,
+				04264EEB2300D32800D3C9CA /* PlacesDetailViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -99,6 +104,7 @@
 				04264ED8230067D200D3C9CA /* Cells */,
 				04264ED323005D5B00D3C9CA /* StarWarsHomeView.swift */,
 				04264EE72300A2ED00D3C9CA /* PeopleDetailsView.swift */,
+				04264EE92300C6E000D3C9CA /* PlanetsDetailsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -213,6 +219,8 @@
 				04264EE82300A2ED00D3C9CA /* PeopleDetailsView.swift in Sources */,
 				04264ED423005D5C00D3C9CA /* StarWarsHomeView.swift in Sources */,
 				04264EBC23005A8800D3C9CA /* AppDelegate.swift in Sources */,
+				04264EEC2300D32800D3C9CA /* PlacesDetailViewController.swift in Sources */,
+				04264EEA2300C6E000D3C9CA /* PlanetsDetailsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

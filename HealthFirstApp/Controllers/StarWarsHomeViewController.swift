@@ -52,29 +52,27 @@ class StarWarsHomeViewController: UIViewController {
 }
     
     private func getPeopleData(){
-        StarWarsAPIClient.getPeopleData { (queryResult) in
+        StarWarsAPIClient.getPeopleData { [weak self](queryResult) in
             switch queryResult {
             case .failure(let error):
                 print("Error \(error) encountered while fetching data")
             case .success(let peopleData):
-                self.people = peopleData
+                self?.people = peopleData
             }
             
         }
     }
     
     private func getPlacesData(){
-        StarWarsAPIClient.getPlacesData { (queryResult) in
+        StarWarsAPIClient.getPlacesData { [weak self] (queryResult) in
             switch queryResult {
             case .failure(let error):
                 print("Error: \(error) encountered while fetching data")
             case .success(let placesData):
-                self.places = placesData
+                self?.places = placesData
             }
         }
     }
-    
-    
     
     
 }
@@ -116,7 +114,6 @@ extension StarWarsHomeViewController: UITableViewDelegate, UITableViewDataSource
             placesTVCell.createdDateLabel.text = "Created Since \(String(describing: place.created))"
             placesTVCell.backgroundColor = .clear
             
-            
             return placesTVCell
         }
     }
@@ -131,8 +128,14 @@ extension StarWarsHomeViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let person = people[indexPath.row]
-        self.present(PeopleDetailsViewController(person: person), animated: true, completion: nil)
+        if starWarsHomeView.viewSegmentedControl.selectedSegmentIndex == 0 {
+            let person = people[indexPath.row]
+            self.present(PeopleDetailsViewController(person: person), animated: true, completion: nil)
+        } else {
+            let planet = places[indexPath.row]
+            self.present(PlacesDetailViewController(planet: planet), animated: true, completion: nil)
+        }
+       
     }
 }
 
