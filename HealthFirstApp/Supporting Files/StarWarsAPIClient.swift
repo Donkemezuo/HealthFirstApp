@@ -19,10 +19,8 @@ enum NetworkError: Error {
 }
 
 final class StarWarsAPIClient {
-    
     private var nextPeopleDataQuery: String?
     private var nextPlanetsDataQuery: String?
-    
     
     private func fetchPeopleData(fromRequest request: URLRequest, completionHandler: @escaping(Result<[PeopleDataWrapper], NetworkError>) -> Void) {
         
@@ -44,8 +42,6 @@ final class StarWarsAPIClient {
         dataTask.resume()
         
     }
-    
-    
      func makeNextQueryForPeopleData(completionHandler: @escaping (Result<[PeopleDataWrapper], NetworkError>) -> Void){
         
         guard let nextQueryURLString = nextPeopleDataQuery else {return }
@@ -57,9 +53,6 @@ final class StarWarsAPIClient {
         let nextRequest = URLRequest(url: nextQueryURL)
         fetchPeopleData(fromRequest: nextRequest, completionHandler: completionHandler)
     }
-    
-    
-    
      func getPeopleData(completionHandler: @escaping(Result<[PeopleDataWrapper], NetworkError>) -> Void){
         
         let peopleEndPointURL = "https://swapi.co/api/people/"
@@ -72,8 +65,6 @@ final class StarWarsAPIClient {
      
         fetchPeopleData(fromRequest: urlRequest, completionHandler: completionHandler)
     }
-    
-    
     private func fetchPlanetsData(fromRequest request: URLRequest, completionHandler: @escaping(Result<[PlanetDataWrapper], NetworkError>) -> Void){
         
         let dataTask = URLSession.shared.dataTask(with: request) { (data, response, error) in
@@ -93,8 +84,6 @@ final class StarWarsAPIClient {
         dataTask.resume()
         
     }
-    
-    
     func makeNextPlanetDataQuery(completionHandler: @escaping(Result<[PlanetDataWrapper], NetworkError>) -> Void){
         guard let nextPlanetDataQueryURLString = nextPlanetsDataQuery else {return}
         guard let nextPlanetDataQueryURL = URL(string: nextPlanetDataQueryURLString) else {
@@ -104,8 +93,6 @@ final class StarWarsAPIClient {
         let nextPlanetDataRequest = URLRequest(url: nextPlanetDataQueryURL)
         fetchPlanetsData(fromRequest: nextPlanetDataRequest, completionHandler: completionHandler)
     }
-    
-    
     func getPlanetsData(completionHandler: @escaping(Result<[PlanetDataWrapper], NetworkError>) -> Void) {
         
         let placesEndPointURL = "https://swapi.co/api/planets/"

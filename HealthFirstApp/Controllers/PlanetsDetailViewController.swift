@@ -18,29 +18,22 @@ class PlanetsDetailViewController: UIViewController {
         view.backgroundColor = .white
         configurePopUpViewConstrains()
         configureDismissView()
-        displayPlanetInfo()
-
-    }
-    
-    
+        planetDetailsView.displayPlanetInfo(withPlanetData: planet)
+ }
     init(planet: PlanetDataWrapper){
         super.init(nibName: nil, bundle: nil)
         self.planet = planet
     }
-    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-
     private func configureDismissView(){
         screenTap = UITapGestureRecognizer(target: self, action: #selector(screenTapped))
         view.addGestureRecognizer(screenTap)
     }
-    
     @objc private func screenTapped(){
-        self.dismiss(animated: true)
+      dismiss(animated: true)
     }
-    
     private func configurePopUpViewConstrains(){
         view.addSubview(planetDetailsView)
         planetDetailsView.translatesAutoresizingMaskIntoConstraints = false
@@ -50,16 +43,5 @@ class PlanetsDetailViewController: UIViewController {
         planetDetailsView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         planetDetailsView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8).isActive = true
         planetDetailsView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.5).isActive = true
-    }
-
-    private func displayPlanetInfo(){
-        planetDetailsView.diameterLabel.text = "Diameter: \(planet.diameter)"
-        planetDetailsView.orbitalPeriod.text = "Orbital Period: \(String(describing: planet.orbital_period))"
-        planetDetailsView.gravityLabel.text = "Gravity: \(planet.gravity)"
-        planetDetailsView.planetNameLabel.text = "Planet Name: \(planet.name)"
-        planetDetailsView.populationLabel.text = "Population: \(planet.population)"
-        planetDetailsView.surfaceWaterLabel.text = "Surface Water: \(String(describing: planet.surface_water))"
-        planetDetailsView.terrainLabel.text = "Terrain: \(planet.terrain)"
-        planetDetailsView.rotationalPeriod.text = "Rotational Period: \(String(describing: planet.rotation_period))"
     }
 }

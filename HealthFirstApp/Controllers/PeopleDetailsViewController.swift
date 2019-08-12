@@ -19,7 +19,7 @@ class PeopleDetailsViewController: UIViewController {
        view.backgroundColor = UIColor.white
         configurePopUpViewConstrains()
         configureDismissView()
-        displayPersonInformations()
+        peopleDetailView.displayPersonInfo(withPersonData: person)
     }
     
     init(person: PeopleDataWrapper){
@@ -41,53 +41,15 @@ class PeopleDetailsViewController: UIViewController {
         peopleDetailView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.5).isActive = true
     }
     
-    
     private func configureDismissView(){
         screenTap = UITapGestureRecognizer(target: self, action: #selector(screenTapped))
         view.addGestureRecognizer(screenTap)
     }
     
     @objc private func screenTapped(){
-       self.dismiss(animated: true)
+      dismiss(animated: true)
     }
     
-    private func displayPersonInformations(){
-        peopleDetailView.nameLabel.text = "Name: \(person.name)"
-        peopleDetailView.birthYear.text = "Birth Year: \(String(describing: person.birth_year))"
-        peopleDetailView.genderLabel.text = "Gender: \(person.gender)"
-        peopleDetailView.heightLabel.text = "Height: \(person.height)"
-        peopleDetailView.skinColorLabel.text = "Skin Color: \(String(describing: person.skin_color))"
-        
-        switch person.hair_color {
-        case "brown":
-            if person.gender == "male" {
-                 peopleDetailView.hairColor.text = "Hair Color: \(String(describing: person.hair_color)) 👨🏾‍🦰"
-            } else if person.gender == "female" {
-                 peopleDetailView.hairColor.text = "Hair Color: \(String(describing: person.hair_color)) 👩🏾‍🦰"
-            } else {
-            peopleDetailView.hairColor.text = "Hair Color: \(String(describing: person.hair_color))🧞‍♂️"
-            }
-        
-        case "black":
-            if person.gender == "male" {
-                peopleDetailView.hairColor.text = "Hair Color: \(String(describing: person.hair_color)) 👦🏿"
-            } else if person.gender == "female" {
-                peopleDetailView.hairColor.text = "Hair Color: \(String(describing: person.hair_color)) 🧒🏿"
-            } else {
-                peopleDetailView.hairColor.text = "Hair Color: \(String(describing: person.hair_color))🧞‍♂️"
-            }
-        case "white":
-            
-            if person.gender == "male" {
-                peopleDetailView.hairColor.text = "Hair Color: \(String(describing: person.hair_color)) 👨🏻‍🦳"
-            } else if person.gender == "female" {
-                peopleDetailView.hairColor.text = "Hair Color: \(String(describing: person.hair_color))👩🏽‍🦳 "
-            } else {
-                peopleDetailView.hairColor.text = "Hair Color: \(String(describing: person.hair_color))🧞‍♂️"
-            }
-        default:
-            peopleDetailView.hairColor.text = "Hair Color: \(String(describing: person.hair_color))"
-        }
-    }
+   
     
 }

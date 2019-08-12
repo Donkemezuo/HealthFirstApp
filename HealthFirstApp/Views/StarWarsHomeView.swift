@@ -9,7 +9,6 @@
 import UIKit
 
 class StarWarsHomeView: UIView {
-    
     public lazy var viewSegmentedControl: UISegmentedControl = {
         let viewSegmentedControl = UISegmentedControl()
         viewSegmentedControl.insertSegment(withTitle: "People", at: 0, animated: true)
@@ -19,7 +18,6 @@ class StarWarsHomeView: UIView {
         viewSegmentedControl.selectedSegmentIndex = 0
         return viewSegmentedControl
     }()
-    
     public lazy var starWarsTableView: UITableView = {
         let starWarsTableView = UITableView()
         starWarsTableView.backgroundColor = .clear
@@ -27,26 +25,21 @@ class StarWarsHomeView: UIView {
         starWarsTableView.register(PlacesTableViewCell.self, forCellReuseIdentifier: "PlacesTableViewCell")
         return starWarsTableView
     }()
-    
     override init(frame: CGRect) {
         super.init(frame: UIScreen.main.bounds)
         commonInit()
     }
-    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         commonInit()
     }
-    
     private func commonInit(){
         setViewConstrains()
     }
-    
     private func setViewConstrains(){
         setViewSegmentedControlConstrains()
         setStarWarsTVConstrains()
     }
-    
     private func setViewSegmentedControlConstrains(){
         addSubview(viewSegmentedControl)
         viewSegmentedControl.translatesAutoresizingMaskIntoConstraints = false
@@ -55,7 +48,6 @@ class StarWarsHomeView: UIView {
         viewSegmentedControl.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.5).isActive = true
         viewSegmentedControl.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.03).isActive = true
     }
-    
     private func setStarWarsTVConstrains(){
         addSubview(starWarsTableView)
         starWarsTableView.translatesAutoresizingMaskIntoConstraints = false
