@@ -13,15 +13,15 @@ With #HealFirst, Users can
     
  - See various planets on starwars
  - Clicke to see more details about a planet like;
-  - name 
-  - population
-  - climate 
-  - gravity level
-  - rotational period
-  - orbital period
-  - surface water level
-  - diameter
-  - terrain
+    - name 
+    - population
+    - climate 
+    - gravity level
+    - rotational period
+    - orbital period
+    - surface water level
+    - diameter
+    - terrain
 
 
 
