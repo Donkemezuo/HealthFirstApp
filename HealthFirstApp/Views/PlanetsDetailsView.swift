@@ -14,14 +14,14 @@ class PlanetsDetailsView: UIView {
         let planetNameLabel = UILabel()
         planetNameLabel.numberOfLines = 0
         planetNameLabel.textColor = .white
-        planetNameLabel.font =  UIFont(name: "HelveticaNeue-Bold", size: 18)
+        planetNameLabel.font =  UIFont(name: "HelveticaNeue-Bold", size: 20)
         return planetNameLabel
     }()
     
     public lazy var rotationalPeriod: UILabel = {
         let rotationalPeriod = UILabel()
         rotationalPeriod.numberOfLines = 0
-        rotationalPeriod.font = UIFont(name: "HelveticaNeue-Bold", size: 16)
+        rotationalPeriod.font = UIFont(name: "HelveticaNeue-Bold", size: 18)
         rotationalPeriod.textColor = .white
         return rotationalPeriod
     }()
@@ -30,7 +30,7 @@ class PlanetsDetailsView: UIView {
         let orbitalPeriod = UILabel()
         orbitalPeriod.numberOfLines = 0
         orbitalPeriod.textColor = .white
-        orbitalPeriod.font = UIFont(name: "HelveticaNeue-Bold", size: 16)
+        orbitalPeriod.font = UIFont(name: "HelveticaNeue-Bold", size: 18)
         return orbitalPeriod
     }()
     
@@ -38,7 +38,7 @@ class PlanetsDetailsView: UIView {
         let gravityLabel = UILabel()
         gravityLabel.numberOfLines = 0
         gravityLabel.textColor = .white
-        gravityLabel.font =  UIFont(name: "HelveticaNeue-Bold", size: 16)
+        gravityLabel.font =  UIFont(name: "HelveticaNeue-Bold", size: 18)
         return gravityLabel
     }()
     
@@ -46,7 +46,7 @@ class PlanetsDetailsView: UIView {
         let populationLabel = UILabel()
         populationLabel.numberOfLines = 0
         populationLabel.textColor = .white
-        populationLabel.font =  UIFont(name: "HelveticaNeue-Bold", size: 16)
+        populationLabel.font =  UIFont(name: "HelveticaNeue-Bold", size: 18)
         return populationLabel
     }()
     
@@ -54,7 +54,7 @@ class PlanetsDetailsView: UIView {
         let surfaceWaterLabel = UILabel()
         surfaceWaterLabel.numberOfLines = 0
         surfaceWaterLabel.textColor = .white
-        surfaceWaterLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 16)
+        surfaceWaterLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 18)
         return surfaceWaterLabel
     }()
     
@@ -62,7 +62,7 @@ class PlanetsDetailsView: UIView {
         let diameterLabel = UILabel()
         diameterLabel.numberOfLines = 0
         diameterLabel.textColor = .white
-        diameterLabel.font =  UIFont(name: "HelveticaNeue-Bold", size: 16)
+        diameterLabel.font =  UIFont(name: "HelveticaNeue-Bold", size: 18)
         return diameterLabel
     }()
     
@@ -70,7 +70,7 @@ class PlanetsDetailsView: UIView {
         let terrainLabel = UILabel()
         terrainLabel.numberOfLines = 0
         terrainLabel.textColor = .white
-        terrainLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 16)
+        terrainLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 18)
         return terrainLabel
     }()
 
@@ -78,12 +78,10 @@ class PlanetsDetailsView: UIView {
         super.init(frame: frame)
         commonInit()
     }
-    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         commonInit()
     }
-    
     
     private func commonInit() {
         setConstrains()
@@ -170,6 +168,17 @@ class PlanetsDetailsView: UIView {
         terrainLabel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         terrainLabel.bottomAnchor.constraint(equalToSystemSpacingBelow: bottomAnchor, multiplier: 0.5).isActive = true
         terrainLabel.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.4).isActive = true
+    }
+    
+    public func displayPlanetInfo(withPlanetData planetData: PlanetDataWrapper){
+        diameterLabel.text = "Diameter: \(planetData.diameter)"
+       orbitalPeriod.text = "Orbital Period: \(String(describing: planetData.orbital_period))"
+      gravityLabel.text = "Gravity: \(planetData.gravity)"
+       planetNameLabel.text = "Planet Name: \(planetData.name)"
+       populationLabel.text = "Population: \(planetData.population)"
+      surfaceWaterLabel.text = "Surface Water: \(String(describing: planetData.surface_water))"
+      terrainLabel.text = "Terrain: \(planetData.terrain)"
+     rotationalPeriod.text = "Rotational Period: \(String(describing: planetData.rotation_period))"
     }
 
 }
