@@ -172,13 +172,13 @@ class PlanetsDetailsView: UIView {
     
     public func displayPlanetInfo(withPlanetData planetData: PlanetDataWrapper){
         diameterLabel.text = "Diameter: \(planetData.diameter)"
-       orbitalPeriod.text = "Orbital Period: \(String(describing: planetData.orbital_period))"
+        orbitalPeriod.text = "Orbital Period: \(String(describing: planetData.orbitalPeriod))"
       gravityLabel.text = "Gravity: \(planetData.gravity)"
        planetNameLabel.text = "Planet Name: \(planetData.name)"
        populationLabel.text = "Population: \(planetData.population)"
-      surfaceWaterLabel.text = "Surface Water: \(String(describing: planetData.surface_water))"
+        surfaceWaterLabel.text = "Surface Water: \(String(describing: planetData.surfaceWater))"
       terrainLabel.text = "Terrain: \(planetData.terrain)"
-     rotationalPeriod.text = "Rotational Period: \(String(describing: planetData.rotation_period))"
+        rotationalPeriod.text = "Rotational Period: \(String(describing: planetData.rotationPeriod))"
     }
 
 }

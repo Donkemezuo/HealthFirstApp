@@ -90,6 +90,6 @@ class PlacesTableViewCell: UITableViewCell {
         planetNameLabel.text = "Name: \(planetData.name)"
         planetClimate.text = "Climate: \(planetData.climate)"
        planetPopulation.text = "Population: \(planetData.population)"
-      createdDateLabel.text = "Created Since \(String(describing: planetData.created))"
+       createdDateLabel.text = "Created Since \(String.convertedDate(fromDate: planetData.createdDate!))"
     }
 }

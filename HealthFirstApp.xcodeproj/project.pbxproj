@@ -24,6 +24,7 @@
 		04264EEA2300C6E000D3C9CA /* PlanetsDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04264EE92300C6E000D3C9CA /* PlanetsDetailsView.swift */; };
 		04264EEC2300D32800D3C9CA /* PlanetsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04264EEB2300D32800D3C9CA /* PlanetsDetailViewController.swift */; };
 		04264EEE2300E93000D3C9CA /* UIAlert+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04264EED2300E93000D3C9CA /* UIAlert+Extension.swift */; };
+		04264EF02302003900D3C9CA /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04264EEF2302003900D3C9CA /* Date+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,7 @@
 		04264EE92300C6E000D3C9CA /* PlanetsDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetsDetailsView.swift; sourceTree = "<group>"; };
 		04264EEB2300D32800D3C9CA /* PlanetsDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetsDetailViewController.swift; sourceTree = "<group>"; };
 		04264EED2300E93000D3C9CA /* UIAlert+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlert+Extension.swift"; sourceTree = "<group>"; };
+		04264EEF2302003900D3C9CA /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +127,7 @@
 			children = (
 				04264EBB23005A8800D3C9CA /* AppDelegate.swift */,
 				04264EED2300E93000D3C9CA /* UIAlert+Extension.swift */,
+				04264EEF2302003900D3C9CA /* Date+Extension.swift */,
 				04264EE32300A00200D3C9CA /* BackgroundColor+Extension.swift */,
 				04264EE12300815B00D3C9CA /* StarWarsAPIClient.swift */,
 			);
@@ -216,6 +219,7 @@
 				04264EE62300A2C700D3C9CA /* PeopleDetailsViewController.swift in Sources */,
 				04264EE42300A00200D3C9CA /* BackgroundColor+Extension.swift in Sources */,
 				04264EE22300815B00D3C9CA /* StarWarsAPIClient.swift in Sources */,
+				04264EF02302003900D3C9CA /* Date+Extension.swift in Sources */,
 				04264EDC230067FE00D3C9CA /* PlanetsTableViewCell.swift in Sources */,
 				04264EDA230067F400D3C9CA /* PeopleTableViewCell.swift in Sources */,
 				04264ECE23005ABD00D3C9CA /* StarWarsHomeViewController.swift in Sources */,

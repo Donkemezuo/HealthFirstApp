@@ -116,40 +116,40 @@ class PeopleDetailsView: UIView {
     }
     public func displayPersonInfo(withPersonData personData: PeopleDataWrapper){
         nameLabel.text = "Name: \(personData.name)"
-        birthYear.text = "Birth Year: \(String(describing: personData.birth_year))"
+        birthYear.text = "Birth Year: \(String(describing: personData.birthYear))"
         genderLabel.text = "Gender: \(personData.gender)"
         heightLabel.text = "Height: \(personData.height)"
-        skinColorLabel.text = "Skin Color: \(String(describing: personData.skin_color))"
+        skinColorLabel.text = "Skin Color: \(String(describing: personData.skinColor))"
         
-        switch personData.hair_color {
+        switch personData.hairColor {
         case "brown":
             if personData.gender == "male" {
-              hairColor.text = "Hair Color: \(String(describing: personData.hair_color)) 👨🏾‍🦰"
+                hairColor.text = "Hair Color: \(String(describing: personData.hairColor)) 👨🏾‍🦰"
             } else if personData.gender == "female" {
-              hairColor.text = "Hair Color: \(String(describing: personData.hair_color)) 👩🏾‍🦰"
+                hairColor.text = "Hair Color: \(String(describing: personData.hairColor)) 👩🏾‍🦰"
             } else {
-              hairColor.text = "Hair Color: \(String(describing: personData.hair_color))🧞‍♂️"
+                hairColor.text = "Hair Color: \(String(describing: personData.hairColor))🧞‍♂️"
             }
             
         case "black":
             if personData.gender == "male" {
-               hairColor.text = "Hair Color: \(String(describing: personData.hair_color)) 👦🏿"
+                hairColor.text = "Hair Color: \(String(describing: personData.hairColor)) 👦🏿"
             } else if personData.gender == "female" {
-              hairColor.text = "Hair Color: \(String(describing: personData.hair_color)) 🧒🏿"
+                hairColor.text = "Hair Color: \(String(describing: personData.hairColor)) 🧒🏿"
             } else {
-                hairColor.text = "Hair Color: \(String(describing: personData.hair_color))🧞‍♂️"
+                hairColor.text = "Hair Color: \(String(describing: personData.hairColor))🧞‍♂️"
             }
         case "white":
             
             if personData.gender == "male" {
-               hairColor.text = "Hair Color: \(String(describing: personData.hair_color)) 👨🏻‍🦳"
+                hairColor.text = "Hair Color: \(String(describing: personData.hairColor)) 👨🏻‍🦳"
             } else if personData.gender == "female" {
-            hairColor.text = "Hair Color: \(String(describing: personData.hair_color))👩🏽‍🦳 "
+                hairColor.text = "Hair Color: \(String(describing: personData.hairColor))👩🏽‍🦳 "
             } else {
-               hairColor.text = "Hair Color: \(String(describing: personData.hair_color))🧞‍♂️"
+                hairColor.text = "Hair Color: \(String(describing: personData.hairColor))🧞‍♂️"
             }
         default:
-        hairColor.text = "Hair Color: \(String(describing: personData.hair_color))"
+            hairColor.text = "Hair Color: \(String(describing: personData.hairColor))"
         }
     }
 
