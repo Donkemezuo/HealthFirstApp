@@ -8,13 +8,14 @@
 
 import UIKit
 
+
 class StarWarsHomeViewController: UIViewController {
     
     private var starWarsHomeView = StarWarsHomeView()
     private var starWarsAPIClient = StarWarsAPIClient()
    
     
-    private var places = [PlanetDataWrapper]() {
+    private var planets = [PlanetDataWrapper](){
         didSet {
             DispatchQueue.main.async {
                 self.starWarsHomeView.starWarsTableView.reloadData()
@@ -40,13 +41,11 @@ class StarWarsHomeViewController: UIViewController {
         configureSegmentedConstrol()
         getFirstPeopleDataSet()
         getPlacesData()
-        
     }
     
     
     private func configureSegmentedConstrol(){
         starWarsHomeView.viewSegmentedControl.addTarget(self, action: #selector(segmentedControlPressed), for: .valueChanged)
-        
     }
     
     @objc private func segmentedControlPressed()  {
@@ -60,12 +59,9 @@ class StarWarsHomeViewController: UIViewController {
                 self?.showAlert(title: "Error", message: "\(error.localizedDescription) encountered while fetching people data")
             case .success(let peopleData):
                 self?.people = peopleData
-                
             }
         }
-        
     }
-    
     
     private func fetchNextSetOfPeopleData(){
         starWarsAPIClient.makeNextQueryForPeopleData {[weak self](queryResult) in
@@ -77,22 +73,53 @@ class StarWarsHomeViewController: UIViewController {
             self?.people = previousPeopleData + morePeopleData
             
                 }
-                
-                print("There are now a total of \(String(describing: self?.people.count) ) people")
-             
-                
             }
         }
     }
     
     private func getPlacesData(){
-        StarWarsAPIClient.getPlacesData { [weak self] (queryResult) in
+        starWarsAPIClient.getPlanetsData { [weak self] (queryResult) in
             switch queryResult {
             case .failure(let error):
                 self?.showAlert(title: "Error", message: "\(error.localizedDescription) encountered while fetching planet data")
             case .success(let placesData):
-                self?.places = placesData
+                self?.planets = placesData
             }
+        }
+    }
+    
+    private func fetchNextSetOfPlanetData(){
+        starWarsAPIClient.makeNextPlanetDataQuery { [weak self ](queryResult) in
+            switch queryResult {
+            case .failure(let error):
+                 self?.showAlert(title: "Error", message: "Error \(error.localizedDescription) encountered while fetching more planet data")
+            case .success(let morePlanetData):
+                if let previousPlanetData = self?.planets {
+                    self?.planets = previousPlanetData + morePlanetData
+                }
+            }
+        }
+    }
+    
+    
+    private func segueToDetailsView(selectedIndex: Int, indexPath: IndexPath){
+        switch selectedIndex {
+        case 0:
+            let person = people[indexPath.row]
+            let personDetailVC = PeopleDetailsViewController(person: person)
+            personDetailVC.modalTransitionStyle = .coverVertical
+            personDetailVC.modalPresentationStyle = .overCurrentContext
+            self.present(personDetailVC, animated: true, completion: nil)
+            
+        case 1:
+            let planet = planets[indexPath.row]
+            let planetDetailVC = PlanetsDetailViewController(planet: planet)
+            planetDetailVC.modalTransitionStyle = .coverVertical
+            planetDetailVC.modalPresentationStyle = .overCurrentContext
+            self.present(planetDetailVC, animated: true, completion: nil)
+            
+        default:
+            break
         }
     }
     
@@ -104,7 +131,7 @@ extension StarWarsHomeViewController: UITableViewDelegate, UITableViewDataSource
         case 0:
             return people.count
         case 1:
-            return places.count
+            return planets.count
         default:
             return 0
         }
@@ -128,7 +155,7 @@ extension StarWarsHomeViewController: UITableViewDelegate, UITableViewDataSource
             
             return peopleTVCell
         } else {
-            let place = places[indexPath.row]
+            let place = planets[indexPath.row]
             guard let placesTVCell = starWarsHomeView.starWarsTableView.dequeueReusableCell(withIdentifier: "PlacesTableViewCell", for: indexPath) as? PlacesTableViewCell else { fatalError("PlacesTableViewCell is nil") }
             
             placesTVCell.planetNameLabel.text = "Name: \(place.name)"
@@ -143,39 +170,28 @@ extension StarWarsHomeViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if starWarsHomeView.viewSegmentedControl.selectedSegmentIndex == 0{
-            return 100
-        } else {
-        return 150
-        }
- 
+    let height = starWarsHomeView.viewSegmentedControl.selectedSegmentIndex == 0 ? CGFloat(100) : CGFloat(150)
+     return height
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if starWarsHomeView.viewSegmentedControl.selectedSegmentIndex == 0 {
-            let person = people[indexPath.row]
-            let personDetailVC = PeopleDetailsViewController(person: person)
-            personDetailVC.modalTransitionStyle = .coverVertical
-            personDetailVC.modalPresentationStyle = .overCurrentContext
-            self.present(personDetailVC, animated: true, completion: nil)
-            
-        } else {
-            let planet = places[indexPath.row]
-            let planetDetailVC = PlanetsDetailViewController(planet: planet)
-            planetDetailVC.modalTransitionStyle = .coverVertical
-            planetDetailVC.modalPresentationStyle = .overCurrentContext
-            self.present(planetDetailVC, animated: true, completion: nil)
-        }
-       
+        
+        segueToDetailsView(selectedIndex: starWarsHomeView.viewSegmentedControl.selectedSegmentIndex, indexPath: indexPath)
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+        
         if starWarsHomeView.viewSegmentedControl.selectedSegmentIndex == 0 {
             
             if indexPath.row == people.count - 2 {
                 self.fetchNextSetOfPeopleData()
             }
-    }
+        } else {
+            if indexPath.row == planets.count - 2 {
+                self.fetchNextSetOfPlanetData()
+            }
+        }
 }
 }
 

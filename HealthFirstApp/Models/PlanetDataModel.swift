@@ -10,6 +10,7 @@ import Foundation
 
 struct PlanetData: Codable {
     let results: [PlanetDataWrapper]
+    let next: String
 }
 
 struct PlanetDataWrapper: Codable {
@@ -23,6 +24,20 @@ struct PlanetDataWrapper: Codable {
     let surface_water: String?
     let gravity: String
     let diameter: String
+//
+//    enum CodingKeys: String,CodingKey {
+//        case name
+//        case rotationPeriod = "rotation_period"
+//        case orbitalPeriod = "orbital_period"
+//        case population
+//        case climate
+//        case created = "createdDate"
+//        case createdDate = "created"
+//        case terrain
+//        case surfaceWater = " surface_water"
+//        case gravity
+//        case diameter
+//    }
     
     enum CodingKeys: String,CodingKey {
         case name

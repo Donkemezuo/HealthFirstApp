@@ -12,7 +12,6 @@ import Foundation
 struct PeopleData: Codable {
     let next: String
     let results: [PeopleDataWrapper]
-    
 }
 
 struct PeopleDataWrapper: Codable {
@@ -27,7 +26,20 @@ struct PeopleDataWrapper: Codable {
     let homeworld: String
     let created: String?
     
-     enum CodingKeys: String, CodingKey {
+//     enum CodingKeys: String, CodingKey {
+//        case name
+//        case height
+//        case mass
+//        case gender
+//        case homeworld
+//        case hairColor = "hair_color"
+//        case skinColor = "skin_color"
+//        case eyeColor = "eye_color"
+//        case birthYear = "birth_year"
+//        case createdDate = "created"
+//  }
+    
+    enum CodingKeys: String, CodingKey {
         case name
         case height
         case mass

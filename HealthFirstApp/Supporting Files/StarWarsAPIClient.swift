@@ -20,8 +20,8 @@ enum NetworkError: Error {
 
 final class StarWarsAPIClient {
     
-    
-    var nextQuery: String?
+    private var nextPeopleDataQuery: String?
+    private var nextPlanetsDataQuery: String?
     
     
     private func fetchPeopleData(fromRequest request: URLRequest, completionHandler: @escaping(Result<[PeopleDataWrapper], NetworkError>) -> Void) {
@@ -32,7 +32,7 @@ final class StarWarsAPIClient {
             } else if let data = data {
                 do {
                     let peopleDataModel = try JSONDecoder().decode(PeopleData.self, from: data)
-                    self.nextQuery = peopleDataModel.next
+                    self.nextPeopleDataQuery = peopleDataModel.next
                     completionHandler(.success(peopleDataModel.results))
                     
                 }catch {
@@ -45,9 +45,10 @@ final class StarWarsAPIClient {
         
     }
     
-    func makeNextQueryForPeopleData(completionHandler: @escaping (Result<[PeopleDataWrapper], NetworkError>) -> Void){
+    
+     func makeNextQueryForPeopleData(completionHandler: @escaping (Result<[PeopleDataWrapper], NetworkError>) -> Void){
         
-        guard let nextQueryURLString = nextQuery else {return }
+        guard let nextQueryURLString = nextPeopleDataQuery else {return }
         guard let nextQueryURL = URL(string: nextQueryURLString) else {
             completionHandler(.failure(.badURL))
             return
@@ -71,10 +72,41 @@ final class StarWarsAPIClient {
      
         fetchPeopleData(fromRequest: urlRequest, completionHandler: completionHandler)
     }
-
     
     
-    static func getPlacesData(completionHandler: @escaping(Result<[PlanetDataWrapper], NetworkError>) -> Void) {
+    private func fetchPlanetsData(fromRequest request: URLRequest, completionHandler: @escaping(Result<[PlanetDataWrapper], NetworkError>) -> Void){
+        
+        let dataTask = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if let error = error {
+                completionHandler(.failure(.apiError(error)))
+            } else if let data = data {
+                do {
+                    let planetsData = try JSONDecoder().decode(PlanetData.self, from: data)
+                    self.nextPlanetsDataQuery = planetsData.next
+                    completionHandler(.success(planetsData.results))
+                } catch {
+                    completionHandler(.failure(.jsonDecodingError(error)))
+                }
+            }
+        }
+        
+        dataTask.resume()
+        
+    }
+    
+    
+    func makeNextPlanetDataQuery(completionHandler: @escaping(Result<[PlanetDataWrapper], NetworkError>) -> Void){
+        guard let nextPlanetDataQueryURLString = nextPlanetsDataQuery else {return}
+        guard let nextPlanetDataQueryURL = URL(string: nextPlanetDataQueryURLString) else {
+            completionHandler(.failure(.badURL))
+            return
+        }
+        let nextPlanetDataRequest = URLRequest(url: nextPlanetDataQueryURL)
+        fetchPlanetsData(fromRequest: nextPlanetDataRequest, completionHandler: completionHandler)
+    }
+    
+    
+    func getPlanetsData(completionHandler: @escaping(Result<[PlanetDataWrapper], NetworkError>) -> Void) {
         
         let placesEndPointURL = "https://swapi.co/api/planets/"
         
@@ -84,21 +116,9 @@ final class StarWarsAPIClient {
         }
         
         let urlRequest = URLRequest(url: url)
-        let dataTask = URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
-            if let error = error {
-                completionHandler(.failure(.apiError(error)))
-            } else if let data = data {
-                do {
-                    let places = try JSONDecoder().decode(PlanetData.self, from: data)
-                    
-                completionHandler(.success(places.results))
-               
-                } catch {
-                    completionHandler(.failure(.jsonDecodingError(error)))
-                }
-            }
-        }
-        dataTask.resume()
+        
+        fetchPlanetsData(fromRequest: urlRequest, completionHandler: completionHandler)
+  
     }
     
 }
