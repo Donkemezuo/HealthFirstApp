@@ -2,7 +2,7 @@
 A user-friendly starters mobile app to display characters and planets using the starwars RESTFul API. HealthFirst is designed with a simple UI to provide users with a smooth user-experience. 
 
 With #HealFirst, Users can; 
-- See various starWars characters 
+- See a list of various starWars characters 
 - Click to see more details about a character like;
     - name 
     - height 
@@ -11,7 +11,7 @@ With #HealFirst, Users can;
     - skin color
     - hair color
     
- - See various planets on starwars
+ - See a list of various planets on starwars
  - Clicke to see more details about a planet like;
     - name 
     - population
