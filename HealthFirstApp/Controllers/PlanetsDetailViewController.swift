@@ -8,8 +8,8 @@
 
 import UIKit
 
-class PlacesDetailViewController: UIViewController {
-    private var planet: PlacesDataWrapper!
+class PlanetsDetailViewController: UIViewController {
+    private var planet: PlanetDataWrapper!
     private var planetDetailsView = PlanetsDetailsView()
     private var screenTap: UITapGestureRecognizer!
 
@@ -23,7 +23,7 @@ class PlacesDetailViewController: UIViewController {
     }
     
     
-    init(planet: PlacesDataWrapper){
+    init(planet: PlanetDataWrapper){
         super.init(nibName: nil, bundle: nil)
         self.planet = planet
     }

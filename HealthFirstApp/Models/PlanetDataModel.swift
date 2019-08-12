@@ -8,11 +8,11 @@
 
 import Foundation
 
-struct PlacesData: Codable {
-    let results: [PlacesDataWrapper]
+struct PlanetData: Codable {
+    let results: [PlanetDataWrapper]
 }
 
-struct PlacesDataWrapper: Codable {
+struct PlanetDataWrapper: Codable {
     let name: String
     let rotation_period: String?
     let orbital_period: String?

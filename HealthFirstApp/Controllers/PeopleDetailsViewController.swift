@@ -26,7 +26,6 @@ class PeopleDetailsViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
         self.person = person
     }
-    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }

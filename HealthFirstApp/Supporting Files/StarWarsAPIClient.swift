@@ -47,7 +47,7 @@ final class StarWarsAPIClient {
     }
     
     
-    static func getPlacesData(completionHandler: @escaping(Result<[PlacesDataWrapper], NetworkError>) -> Void) {
+    static func getPlacesData(completionHandler: @escaping(Result<[PlanetDataWrapper], NetworkError>) -> Void) {
         
         let placesEndPointURL = "https://swapi.co/api/planets/"
         
@@ -62,7 +62,7 @@ final class StarWarsAPIClient {
                 completionHandler(.failure(.apiError(error)))
             } else if let data = data {
                 do {
-                    let places = try JSONDecoder().decode(PlacesData.self, from: data)
+                    let places = try JSONDecoder().decode(PlanetData.self, from: data)
                     
                 completionHandler(.success(places.results))
                

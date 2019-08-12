@@ -13,7 +13,7 @@ class StarWarsHomeViewController: UIViewController {
     private var starWarsHomeView = StarWarsHomeView()
    
     
-    private var places = [PlacesDataWrapper]() {
+    private var places = [PlanetDataWrapper]() {
         didSet {
             DispatchQueue.main.async {
                 self.starWarsHomeView.starWarsTableView.reloadData()
@@ -42,6 +42,7 @@ class StarWarsHomeViewController: UIViewController {
         
     }
     
+    
     private func configureSegmentedConstrol(){
         starWarsHomeView.viewSegmentedControl.addTarget(self, action: #selector(segmentedControlPressed), for: .valueChanged)
         
@@ -55,7 +56,8 @@ class StarWarsHomeViewController: UIViewController {
         StarWarsAPIClient.getPeopleData { [weak self](queryResult) in
             switch queryResult {
             case .failure(let error):
-                print("Error \(error) encountered while fetching data")
+                self?.showAlert(title: "Error", message: "\(error.localizedDescription) encountered while fetching people data")
+
             case .success(let peopleData):
                 self?.people = peopleData
             }
@@ -67,7 +69,7 @@ class StarWarsHomeViewController: UIViewController {
         StarWarsAPIClient.getPlacesData { [weak self] (queryResult) in
             switch queryResult {
             case .failure(let error):
-                print("Error: \(error) encountered while fetching data")
+                self?.showAlert(title: "Error", message: "\(error.localizedDescription) encountered while fetching planet data")
             case .success(let placesData):
                 self?.places = placesData
             }
@@ -102,6 +104,7 @@ extension StarWarsHomeViewController: UITableViewDelegate, UITableViewDataSource
             }
             
             peopleTVCell.backgroundColor = .clear
+            peopleTVCell.selectionStyle = .none
             
             return peopleTVCell
         } else {
@@ -113,6 +116,7 @@ extension StarWarsHomeViewController: UITableViewDelegate, UITableViewDataSource
             placesTVCell.planetPopulation.text = "Population: \(place.population)"
             placesTVCell.createdDateLabel.text = "Created Since \(String(describing: place.created))"
             placesTVCell.backgroundColor = .clear
+            placesTVCell.selectionStyle = .none
             
             return placesTVCell
         }
@@ -130,10 +134,16 @@ extension StarWarsHomeViewController: UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if starWarsHomeView.viewSegmentedControl.selectedSegmentIndex == 0 {
             let person = people[indexPath.row]
-            self.present(PeopleDetailsViewController(person: person), animated: true, completion: nil)
+            let personDetailVC = PeopleDetailsViewController(person: person)
+            personDetailVC.modalTransitionStyle = .coverVertical
+            personDetailVC.modalPresentationStyle = .overCurrentContext
+            self.present(personDetailVC, animated: true, completion: nil)
         } else {
             let planet = places[indexPath.row]
-            self.present(PlacesDetailViewController(planet: planet), animated: true, completion: nil)
+            let planetDetailVC = PlanetsDetailViewController(planet: planet)
+            planetDetailVC.modalTransitionStyle = .coverVertical
+            planetDetailVC.modalPresentationStyle = .overCurrentContext
+            self.present(planetDetailVC, animated: true, completion: nil)
         }
        
     }
