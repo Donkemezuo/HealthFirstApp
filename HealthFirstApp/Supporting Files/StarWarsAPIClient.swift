@@ -20,7 +20,46 @@ enum NetworkError: Error {
 
 final class StarWarsAPIClient {
     
-    static func getPeopleData(completionHandler: @escaping(Result<[PeopleDataWrapper], NetworkError>) -> Void){
+    
+    var nextQuery: String?
+    
+    
+    private func fetchPeopleData(fromRequest request: URLRequest, completionHandler: @escaping(Result<[PeopleDataWrapper], NetworkError>) -> Void) {
+        
+        let dataTask = URLSession.shared.dataTask(with: request) {(data, response, error) in
+            if let error = error {
+                completionHandler(.failure(.apiError(error)))
+            } else if let data = data {
+                do {
+                    let peopleDataModel = try JSONDecoder().decode(PeopleData.self, from: data)
+                    self.nextQuery = peopleDataModel.next
+                    completionHandler(.success(peopleDataModel.results))
+                    
+                }catch {
+                    completionHandler(.failure(.jsonDecodingError(error)))
+                }
+            }
+        }
+        
+        dataTask.resume()
+        
+    }
+    
+    func makeNextQueryForPeopleData(completionHandler: @escaping (Result<[PeopleDataWrapper], NetworkError>) -> Void){
+        
+        guard let nextQueryURLString = nextQuery else {return }
+        guard let nextQueryURL = URL(string: nextQueryURLString) else {
+            completionHandler(.failure(.badURL))
+            return
+        }
+        
+        let nextRequest = URLRequest(url: nextQueryURL)
+        fetchPeopleData(fromRequest: nextRequest, completionHandler: completionHandler)
+    }
+    
+    
+    
+     func getPeopleData(completionHandler: @escaping(Result<[PeopleDataWrapper], NetworkError>) -> Void){
         
         let peopleEndPointURL = "https://swapi.co/api/people/"
         guard let url = URL(string: peopleEndPointURL) else {
@@ -29,22 +68,10 @@ final class StarWarsAPIClient {
         }
         
         let urlRequest = URLRequest(url: url)
-        
-        let dataTask = URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
-            
-            if let error = error {
-                completionHandler(.failure(.apiError(error)))
-            } else if let data = data {
-                do {
-                    let people = try JSONDecoder().decode(PeopleData.self, from: data)
-                    completionHandler(.success(people.results))
-                }catch {
-                    completionHandler(.failure(.jsonDecodingError(error)))
-                }
-            }
-        }
-        dataTask.resume()
+     
+        fetchPeopleData(fromRequest: urlRequest, completionHandler: completionHandler)
     }
+
     
     
     static func getPlacesData(completionHandler: @escaping(Result<[PlanetDataWrapper], NetworkError>) -> Void) {

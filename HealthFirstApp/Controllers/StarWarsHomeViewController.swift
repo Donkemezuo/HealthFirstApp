@@ -11,6 +11,7 @@ import UIKit
 class StarWarsHomeViewController: UIViewController {
     
     private var starWarsHomeView = StarWarsHomeView()
+    private var starWarsAPIClient = StarWarsAPIClient()
    
     
     private var places = [PlanetDataWrapper]() {
@@ -37,7 +38,7 @@ class StarWarsHomeViewController: UIViewController {
         starWarsHomeView.starWarsTableView.dataSource = self
         starWarsHomeView.starWarsTableView.delegate = self
         configureSegmentedConstrol()
-        getPeopleData()
+        getFirstPeopleDataSet()
         getPlacesData()
         
     }
@@ -52,16 +53,35 @@ class StarWarsHomeViewController: UIViewController {
         starWarsHomeView.starWarsTableView.reloadData()
 }
     
-    private func getPeopleData(){
-        StarWarsAPIClient.getPeopleData { [weak self](queryResult) in
+    private func getFirstPeopleDataSet(){
+        starWarsAPIClient.getPeopleData {[weak self](queryResult) in
             switch queryResult {
             case .failure(let error):
                 self?.showAlert(title: "Error", message: "\(error.localizedDescription) encountered while fetching people data")
-
             case .success(let peopleData):
                 self?.people = peopleData
+                
             }
+        }
+        
+    }
+    
+    
+    private func fetchNextSetOfPeopleData(){
+        starWarsAPIClient.makeNextQueryForPeopleData {[weak self](queryResult) in
+            switch queryResult {
+            case .failure(let error):
+                self?.showAlert(title: "Error", message: "Error \(error.localizedDescription) encountered while fetching more people data")
+            case .success(let morePeopleData):
+                if let previousPeopleData = self?.people {
+            self?.people = previousPeopleData + morePeopleData
             
+                }
+                
+                print("There are now a total of \(String(describing: self?.people.count) ) people")
+             
+                
+            }
         }
     }
     
@@ -138,6 +158,7 @@ extension StarWarsHomeViewController: UITableViewDelegate, UITableViewDataSource
             personDetailVC.modalTransitionStyle = .coverVertical
             personDetailVC.modalPresentationStyle = .overCurrentContext
             self.present(personDetailVC, animated: true, completion: nil)
+            
         } else {
             let planet = places[indexPath.row]
             let planetDetailVC = PlanetsDetailViewController(planet: planet)
@@ -147,5 +168,14 @@ extension StarWarsHomeViewController: UITableViewDelegate, UITableViewDataSource
         }
        
     }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if starWarsHomeView.viewSegmentedControl.selectedSegmentIndex == 0 {
+            
+            if indexPath.row == people.count - 2 {
+                self.fetchNextSetOfPeopleData()
+            }
+    }
+}
 }
 

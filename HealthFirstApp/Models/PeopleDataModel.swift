@@ -10,7 +10,7 @@ import Foundation
 
 
 struct PeopleData: Codable {
-    
+    let next: String
     let results: [PeopleDataWrapper]
     
 }
