@@ -1,2 +1,28 @@
 # HealthFirstApp
-A user-friendly starters mobile app to display people and places using a RESTFul API
+A user-friendly starters mobile app to display characters and planets using the starwars RESTFul API
+
+With #HealFirst, Users can 
+- See various starWars characters 
+- Click to see more details about a character like;
+    - name 
+    - height 
+    - character created date 
+    - gender 
+    - skin color
+    - hair color
+    
+ - See various planets on starwars
+ - Clicke to see more details about a planet like;
+  - name 
+  - population
+  - climate 
+  - gravity level
+  - rotational period
+  - orbital period
+  - surface water level
+  - diameter
+  - terrain
+
+
+
+
