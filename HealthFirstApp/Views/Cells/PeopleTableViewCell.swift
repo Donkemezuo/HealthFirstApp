@@ -13,7 +13,7 @@ class PeopleTableViewCell: UITableViewCell {
     public lazy var nameLabel: UILabel = {
         let nameLabel = UILabel()
         nameLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 20)
-        nameLabel.textColor = .white
+        nameLabel.textColor = .yellow 
         return nameLabel
     }()
     public lazy var genderLabel: UILabel = {
@@ -87,11 +87,10 @@ class PeopleTableViewCell: UITableViewCell {
     }
     public func displayCellInfo(withPeopleData peopleData: PeopleDataWrapper){
         nameLabel.text = peopleData.name
-    
-        genderLabel.text = "Gender: \(peopleData.gender)"
-      heightLabel.text = "Height: \(peopleData.height)"
-        if peopleData.created != nil {
-        createdDateLabel.text = "Created Since \(String(describing: peopleData.created))"
+       genderLabel.text = "Gender: \(peopleData.gender)"
+       heightLabel.text = "Height: \(peopleData.height)"
+        if peopleData.createdDate != nil {
+            createdDateLabel.text = "Created Since \(String.convertedDate(fromDate: peopleData.createdDate!))"
         } else {
         createdDateLabel.text = "Created date not specified"
         }
