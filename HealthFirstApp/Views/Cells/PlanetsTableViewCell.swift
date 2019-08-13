@@ -12,7 +12,7 @@ class PlacesTableViewCell: UITableViewCell {
     public lazy var planetNameLabel: UILabel = {
         let planetNameLabel = UILabel()
         planetNameLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 20)
-        planetNameLabel.textColor = .white
+        planetNameLabel.textColor = .yellow 
         return planetNameLabel
     }()
     public lazy var planetPopulation: UILabel = {

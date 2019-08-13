@@ -13,7 +13,7 @@ class PlanetsDetailsView: UIView {
     public lazy var planetNameLabel: UILabel = {
         let planetNameLabel = UILabel()
         planetNameLabel.numberOfLines = 0
-        planetNameLabel.textColor = .white
+        planetNameLabel.textColor = .yellow
         planetNameLabel.font =  UIFont(name: "HelveticaNeue-Bold", size: 20)
         return planetNameLabel
     }()
@@ -102,8 +102,8 @@ class PlanetsDetailsView: UIView {
         addSubview(planetNameLabel)
         planetNameLabel.translatesAutoresizingMaskIntoConstraints = false
         planetNameLabel.topAnchor.constraint(equalToSystemSpacingBelow: topAnchor, multiplier: 0.5).isActive = true
-        planetNameLabel.centerXAnchor.constraint(equalToSystemSpacingAfter: centerXAnchor, multiplier: 0.5).isActive = true
-        planetNameLabel.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.4).isActive = true
+        planetNameLabel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        planetNameLabel.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.8).isActive = true
         planetNameLabel.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.2).isActive = true
     }
     
@@ -120,7 +120,7 @@ class PlanetsDetailsView: UIView {
         addSubview(gravityLabel)
         gravityLabel.translatesAutoresizingMaskIntoConstraints = false
         gravityLabel.topAnchor.constraint(equalToSystemSpacingBelow: planetNameLabel.bottomAnchor, multiplier: 0.5).isActive = true
-        gravityLabel.leadingAnchor.constraint(equalToSystemSpacingAfter: populationLabel.trailingAnchor, multiplier: 1.2).isActive = true
+        gravityLabel.leadingAnchor.constraint(equalToSystemSpacingAfter: populationLabel.trailingAnchor, multiplier: 1.8).isActive = true
         gravityLabel.widthAnchor.constraint(equalTo: populationLabel.widthAnchor).isActive = true
         gravityLabel.heightAnchor.constraint(equalTo: populationLabel.heightAnchor).isActive = true
     }
@@ -138,7 +138,7 @@ class PlanetsDetailsView: UIView {
         addSubview(orbitalPeriod)
         orbitalPeriod.translatesAutoresizingMaskIntoConstraints = false
         orbitalPeriod.topAnchor.constraint(equalToSystemSpacingBelow: gravityLabel.bottomAnchor, multiplier: 0.5).isActive = true
-        orbitalPeriod.leadingAnchor.constraint(equalToSystemSpacingAfter: rotationalPeriod.trailingAnchor, multiplier: 1.2).isActive = true
+        orbitalPeriod.leadingAnchor.constraint(equalToSystemSpacingAfter: rotationalPeriod.trailingAnchor, multiplier: 1.8).isActive = true
         orbitalPeriod.widthAnchor.constraint(equalTo: rotationalPeriod.widthAnchor).isActive = true
         orbitalPeriod.heightAnchor.constraint(equalTo: rotationalPeriod.heightAnchor).isActive = true
     }
@@ -156,7 +156,7 @@ class PlanetsDetailsView: UIView {
         addSubview(diameterLabel)
         diameterLabel.translatesAutoresizingMaskIntoConstraints = false
         diameterLabel.topAnchor.constraint(equalToSystemSpacingBelow: orbitalPeriod.bottomAnchor, multiplier: 0.5).isActive = true
-        diameterLabel.leadingAnchor.constraint(equalToSystemSpacingAfter: surfaceWaterLabel.trailingAnchor, multiplier: 1.2).isActive = true
+        diameterLabel.leadingAnchor.constraint(equalToSystemSpacingAfter: surfaceWaterLabel.trailingAnchor, multiplier: 1.8).isActive = true
         diameterLabel.widthAnchor.constraint(equalTo: surfaceWaterLabel.widthAnchor).isActive = true
         diameterLabel.heightAnchor.constraint(equalTo: rotationalPeriod.heightAnchor).isActive = true
     }
@@ -166,19 +166,19 @@ class PlanetsDetailsView: UIView {
         terrainLabel.translatesAutoresizingMaskIntoConstraints = false
         terrainLabel.topAnchor.constraint(equalToSystemSpacingBelow: diameterLabel.bottomAnchor, multiplier: 0.5).isActive = true
         terrainLabel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-        terrainLabel.bottomAnchor.constraint(equalToSystemSpacingBelow: bottomAnchor, multiplier: 0.5).isActive = true
-        terrainLabel.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.4).isActive = true
+        terrainLabel.bottomAnchor.constraint(equalToSystemSpacingBelow: bottomAnchor, multiplier: 0.2).isActive = true
+        terrainLabel.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.8).isActive = true
     }
     
     public func displayPlanetInfo(withPlanetData planetData: PlanetDataWrapper){
         diameterLabel.text = "Diameter: \(planetData.diameter)"
-        orbitalPeriod.text = "Orbital Period: \(String(describing: planetData.orbitalPeriod))"
+        orbitalPeriod.text = "Orbital Period: \(planetData.orbitalPeriod ?? "not specified")"
       gravityLabel.text = "Gravity: \(planetData.gravity)"
        planetNameLabel.text = "Planet Name: \(planetData.name)"
        populationLabel.text = "Population: \(planetData.population)"
-        surfaceWaterLabel.text = "Surface Water: \(String(describing: planetData.surfaceWater))"
+        surfaceWaterLabel.text = "Surface Water: \(planetData.surfaceWater ?? "not specified")"
       terrainLabel.text = "Terrain: \(planetData.terrain)"
-        rotationalPeriod.text = "Rotational Period: \(String(describing: planetData.rotationPeriod))"
+        rotationalPeriod.text = "Rotational Period: \(planetData.rotationPeriod ?? "not specified")"
     }
 
 }

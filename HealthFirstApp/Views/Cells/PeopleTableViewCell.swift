@@ -13,7 +13,7 @@ class PeopleTableViewCell: UITableViewCell {
     public lazy var nameLabel: UILabel = {
         let nameLabel = UILabel()
         nameLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 20)
-        nameLabel.textColor = .white
+        nameLabel.textColor = .yellow 
         return nameLabel
     }()
     public lazy var genderLabel: UILabel = {
